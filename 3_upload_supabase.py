@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from unicodedata import normalize
 
 import os
 import pickle
@@ -31,7 +32,7 @@ def main():
         row: Dict[str, Any] = {
             "event_id": DAY_EVENT[circle.Day],
             "location_top": circle.Hall,
-            "location": circle.Block + circle.Space,
+            "location": normalize('NFKC', circle.Block + circle.Space),
             "jname": circle.Name,
             "data": circle.model_dump(),
         }
